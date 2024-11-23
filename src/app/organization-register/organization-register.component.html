@@ -1,26 +1,28 @@
 <div class="organization-container">
-    <div class="left-section">
-      <h2>Organisation Management</h2><span>{{organisationName}}</span>
-      <button class="action-button" (click)="take_attendance()">Take Attendance</button>
-      <button class="action-button" (click)="add_User()">Add New User</button>
-    </div>
-    <div class="right-section">
-      <table *ngIf="attendanceData.length > 0" class="attendance-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Rolls</th>
-            <th>Times</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let attendance of attendanceData">
-            <td>{{attendance.name}}</td>
-            <td>{{attendance.rolls}}</td>
-            <td>{{attendance.times}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div class="left-section">
+    <h2>
+      Organisation Management
+      (<span class="organization-name">{{organisationName}}</span>)
+    </h2>
+    <button class="action-button" (click)="take_attendance()">Take Attendance</button>
+    <button class="action-button" (click)="add_User()">Add New User</button>
   </div>
-  
+  <div class="right-section">
+    <table *ngIf="attendanceData.length > 0" class="attendance-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Rolls</th>
+          <th>Times</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let attendance of attendanceData">
+          <td>{{attendance.name}}</td>
+          <td>{{attendance.rolls}}</td>
+          <td>{{attendance.times}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

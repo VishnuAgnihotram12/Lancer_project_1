@@ -48,6 +48,12 @@
         <div class="form-group">
           <button type="submit" class="btn btn-primary">Login</button>
         </div>
+        <div class="form-group register-container">
+          <p>
+            Don't have an account? 
+            <a (click)="navigator()">Register</a>
+          </p>
+        </div>
       </form>
     </div>
     <div *ngIf="isLoading" class="loader"></div>
