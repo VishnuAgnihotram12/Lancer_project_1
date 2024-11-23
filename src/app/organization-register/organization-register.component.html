@@ -8,6 +8,9 @@
     <button class="action-button" (click)="add_User()">Add New User</button>
   </div>
   <div class="right-section">
+    <div class="position">
+      <button *ngIf="attendanceData.length > 0" class="btn_class" (click)="downloadExcel()">Download Excel</button>
+    </div>
     <table *ngIf="attendanceData.length > 0" class="attendance-table">
       <thead>
         <tr>

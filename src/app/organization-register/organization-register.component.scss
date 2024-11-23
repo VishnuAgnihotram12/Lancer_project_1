@@ -92,3 +92,17 @@
 .attendance-table td {
   text-align: center;
 }
+
+.btn_class{
+  background-color: #4f46e5;
+  border-radius: 4px;
+  border: 1px solid;
+  color: #f5f6fc;
+  width: 125px;
+  cursor: pointer;
+}
+
+.position{
+  display: flex;
+  justify-content: end;
+}
