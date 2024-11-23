@@ -1,0 +1,73 @@
+<body class="organization-body">
+    <div class="container">
+      <div class="row">
+        <!-- Left Side: Select Organization -->
+        <div class="col-md-5">
+          <div class="card wide-card">
+            <div class="card-header">
+              <h5 class="card-title">Select Organization</h5>
+            </div>
+            <div class="card-body">
+              <select
+                class="form-select"
+                aria-label="Select Organization"
+                [(ngModel)]="selectedOrganizationId"
+              >
+                <option [ngValue]="undefined" [disabled]="true">Select Organization</option>
+                <option
+                  *ngFor="let organization of organizationOptions"
+                  [value]="organization.id"
+                >
+                  {{ organization.name }}
+                </option>
+              </select>
+            </div>
+            <div class="text-center" style="padding: 10px;">
+              <button class="btn btn-primary custom-btn" (click)="apply()">Apply</button>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Right Side: Organization Registration -->
+        <div class="col-md-5">
+          <div class="card wide-card">
+            <div class="card-header">
+              <h5 class="card-title">Organization Registration</h5>
+            </div>
+            <div class="card-body">
+              <form [formGroup]="form" (ngSubmit)="organizationRegister()">
+                <div class="form-group">
+                  <label>Organization Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="organizationName"
+                    [ngClass]="{ 'is-invalid': submitted && f['organizationName'].errors }"
+                  />
+                  <div
+                    *ngIf="submitted && f['organizationName'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f['organizationName'].errors['required']">
+                      Organization Name is required.
+                    </div>
+                    <div *ngIf="f['organizationName'].errors['minlength']">
+                      Organization Name must be at least 3 characters.
+                    </div>
+                    <div *ngIf="f['organizationName'].errors['maxlength']">
+                      Organization Name must not exceed 50 characters.
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary custom-btn">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  

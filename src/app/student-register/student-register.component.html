@@ -1,0 +1,114 @@
+<div class="header-bar">
+    <h1>Attendance AI</h1>
+  </div>
+  
+  <div class="student-register-container">
+    <div class="form-container">
+      <h2>Sign Up</h2>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <!-- Personal Information -->
+        <fieldset>
+          <legend>Personal Information</legend>
+          <div class="row">
+            <div class="form-group col">
+              <label for="fullname">Full Name</label>
+              <input
+                type="text"
+                id="fullname"
+                formControlName="fullname"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['fullname'].invalid }"
+              />
+              <div *ngIf="submitted && f['fullname']?.invalid" class="invalid-feedback">
+                <div *ngIf="f['fullname']?.errors?.['required']">Full name is required.</div>
+                <div *ngIf="f['fullname']?.errors?.['minlength']">
+                  Full name must be at least 3 characters.
+                </div>
+                <div *ngIf="f['fullname']?.errors?.['maxlength']">
+                  Full name must not exceed 50 characters.
+                </div>
+              </div>
+            </div>
+  
+            <div class="form-group col">
+              <label for="studentId">Student ID</label>
+              <input
+                type="text"
+                id="studentId"
+                formControlName="studentId"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['studentId'].invalid }"
+              />
+              <div *ngIf="submitted && f['studentId']?.invalid" class="invalid-feedback">
+                <div *ngIf="f['studentId']?.errors?.['required']">Student ID is required.</div>
+                <div *ngIf="f['studentId']?.errors?.['pattern']">Student ID must be numeric.</div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+  
+        <!-- College Preferences -->
+        <fieldset>
+          <legend>College Preferences</legend>
+          <div class="row">
+            <div class="form-group col">
+              <label for="institution">Select Institution</label>
+              <select
+                id="institution"
+                formControlName="institution"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['institution'].invalid }"
+              >
+                <option value="">-- Select Institution --</option>
+                <option value="Institution 1">Institution 1</option>
+                <option value="Institution 2">Institution 2</option>
+              </select>
+              <div *ngIf="submitted && f['institution']?.invalid" class="invalid-feedback">
+                Institution selection is required.
+              </div>
+            </div>
+  
+            <div class="form-group col">
+              <label for="department">Select Department</label>
+              <select
+                id="department"
+                formControlName="department"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['department'].invalid }"
+              >
+                <option value="">-- Select Department --</option>
+                <option value="Department 1">Department 1</option>
+                <option value="Department 2">Department 2</option>
+              </select>
+              <div *ngIf="submitted && f['department']?.invalid" class="invalid-feedback">
+                Department selection is required.
+              </div>
+            </div>
+          </div>
+        </fieldset>
+  
+        <!-- Facial Recognition Setup -->
+        <fieldset>
+          <legend>Facial Recognition Setup</legend>
+          <div class="camera-container">
+            <div class="capture-box">
+              <img *ngIf="capturedImage; else videoContainer" [src]="capturedImage" alt="Captured Image" />
+              <ng-template #videoContainer>
+                <video #video autoplay></video>
+              </ng-template>
+            </div>
+            <div class="button-group">
+              <button type="button" class="btn btn-primary" (click)="startCamera()">Start Camera</button>
+              <button type="button" class="btn btn-secondary" *ngIf="!capturedImage" (click)="captureImage()">
+                Capture Image
+              </button>
+            </div>
+          </div>
+        </fieldset>
+  
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-success">Complete Registration</button>
+      </form>
+    </div>
+  </div>
+  

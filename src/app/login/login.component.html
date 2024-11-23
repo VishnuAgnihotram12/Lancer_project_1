@@ -1,0 +1,55 @@
+<div class="login-container">
+    <div class="image-container">
+        <img src="assets/Signup-Icon.svg" alt="Signup Image" />
+    </div>
+    <div class="form-container">
+      <h2>Login</h2>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <!-- Email or Username -->
+        <div class="form-group">
+          <label for="emailOrUsername">Email or Username</label>
+          <input
+            type="text"
+            id="emailOrUsername"
+            formControlName="emailOrUsername"
+            class="form-control"
+            (blur)="f['emailOrUsername'].markAsTouched()"
+            [ngClass]="{ 'is-invalid': f['emailOrUsername'].touched && f['emailOrUsername'].invalid }"
+          />
+          <div *ngIf="f['emailOrUsername'].touched && f['emailOrUsername']?.invalid" class="invalid-feedback">
+            <div *ngIf="f['emailOrUsername']?.errors?.['required']">Email or Username is required.</div>
+            <div *ngIf="f['emailOrUsername']?.errors?.['minlength']">
+              Email or Username must be at least 3 characters.
+            </div>
+          </div>
+        </div>
+  
+        <!-- Password -->
+        <div class="form-group password-main">
+          <label for="password">Password</label>
+          <input
+            id="password"
+            [type]="passwordHidden ? 'password' : 'text'"
+            formControlName="password"
+            class="form-control"
+            (blur)="f['password'].markAsTouched()"
+            [ngClass]="{ 'is-invalid': f['password'].touched && f['password'].invalid }"
+          />
+          <span class="password-eye" (click)="togglePasswordVisibility()">
+            <i [ngClass]="passwordHidden ? 'fa fa-eye' : 'fa fa-eye-slash'"></i>
+          </span>
+          <div *ngIf="f['password'].touched && f['password']?.invalid" class="invalid-feedback">
+            <div *ngIf="f['password']?.errors?.['required']">Password is required.</div>
+            <div *ngIf="f['password']?.errors?.['minlength']">Password must be at least 6 characters.</div>
+          </div>
+        </div>
+  
+        <!-- Submit Button -->
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="isLoading" class="loader"></div>
+  </div>
+  
