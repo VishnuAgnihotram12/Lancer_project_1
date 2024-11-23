@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'AI_Project';
+  router: any;
+  navigateToSignup() {
+    this.router.navigate(['/signup']);
+}
 }

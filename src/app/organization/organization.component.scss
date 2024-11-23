@@ -1,0 +1,115 @@
+.organization-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    margin: 0; /* Remove any default margin */
+    padding: 0; /* Remove any default padding */
+    background-image: url('/assets/bg-img.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; /* Prevent background tiling */
+    background-attachment: fixed; /* Make background fixed in place */
+}
+
+html, body {
+    margin: 0; /* Ensure no extra spacing around the body */
+    padding: 0;
+    width: 100%; /* Ensure full width */
+    height: 100%; /* Ensure full height */
+}
+
+.container {
+    max-width: 1200px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between; /* Align items to the start of the row */
+}
+
+.col-md-5 {
+    flex: 0 0 45%; /* Slightly wider boxes */
+}
+
+.card {
+    background: #ffffff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid #ddd;
+}
+
+.wide-card {
+    padding: 20px;
+    width: 100%;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    padding: 10px 15px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    text-align: center;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.form-select,
+.form-control {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.btn-primary.custom-btn {
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary.custom-btn:hover {
+    background-color: #0056b3;
+}
+
+.invalid-feedback {
+    color: #e3342f;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column; /* Stack cards vertically on smaller screens */
+        align-items: center;
+        gap: 20px; /* Reduce gap for smaller screens */
+    }
+
+    .col-md-5 {
+        width: 100%; /* Full width for stacked layout */
+    }
+}

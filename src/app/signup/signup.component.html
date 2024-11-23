@@ -1,0 +1,124 @@
+<div class="signup-container">
+    <div class="image-container">
+      <img src="assets/Signup-Icon.svg" alt="Signup Image" />
+    </div>
+    <div class="form-container">
+      <h2>Sign Up</h2>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <!-- Full Name -->
+        <div class="form-group">
+          <label for="fullname">Full Name</label>
+          <input
+            type="text"
+            id="fullname"
+            formControlName="fullname"
+            class="form-control"
+            (blur)="f['fullname'].markAsTouched()"
+            [ngClass]="{ 'is-invalid': f['fullname'].touched && f['fullname'].invalid }"
+          />
+          <div *ngIf="f['fullname'].touched && f['fullname']?.invalid" class="invalid-feedback">
+            <div *ngIf="f['fullname']?.errors?.['required']">Full name is required.</div>
+            <div *ngIf="f['fullname']?.errors?.['minlength']">
+              Full name must be at least 3 characters.
+            </div>
+            <div *ngIf="f['fullname']?.errors?.['maxlength']">
+              Full name must not exceed 50 characters.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              formControlName="username"
+              class="form-control"
+              (blur)="f['username'].markAsTouched()"
+              [ngClass]="{ 'is-invalid': f['username'].touched && f['username'].invalid }"
+            />
+            <div *ngIf="f['username'].touched && f['username']?.invalid" class="invalid-feedback">
+              <div *ngIf="f['username']?.errors?.['required']">Username is required.</div>
+              <div *ngIf="f['username']?.errors?.['minlength']">
+                Username must be at least 3 characters.
+              </div>
+              <div *ngIf="f['username']?.errors?.['maxlength']">
+                Username must not exceed 20 characters.
+              </div>
+            </div>
+          </div>
+    
+  
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            class="form-control"
+            (blur)="f['email'].markAsTouched()"
+            [ngClass]="{ 'is-invalid': f['email'].touched && f['email'].invalid }"
+          />
+          <div *ngIf="f['email'].touched && f['email']?.invalid" class="invalid-feedback">
+            <div *ngIf="f['email']?.errors?.['required']">Email is required.</div>
+            <div *ngIf="f['email']?.errors?.['email']">Invalid email address.</div>
+          </div>
+        </div>
+  
+        <!-- Password -->
+        <div class="form-group password-main">
+          <label for="password">Password</label>
+          <input
+            id="password"
+            [type]="passwordHidden ? 'password' : 'text'"
+            formControlName="password"
+            class="form-control"
+            (blur)="f['password'].markAsTouched()"
+            [ngClass]="{ 'is-invalid': f['password'].touched && f['password'].invalid }"
+          />
+          <span class="password-eye" (click)="togglePasswordVisibility()">
+            <i [ngClass]="passwordHidden ? 'fa fa-eye' : 'fa fa-eye-slash'"></i>
+          </span>
+          <div *ngIf="f['password'].touched && f['password']?.invalid" class="invalid-feedback">
+            <div *ngIf="f['password']?.errors?.['required']">Password is required.</div>
+            <div *ngIf="f['password']?.errors?.['minlength']">
+              Password must be at least 6 characters.
+            </div>
+            <div *ngIf="f['password']?.errors?.['maxlength']">
+              Password must not exceed 40 characters.
+            </div>
+          </div>
+        </div>
+  
+        <!-- Confirm Password -->
+        <div class="form-group password-main">
+          <label for="confirmPassword">Confirm Password</label>
+          <input
+            id="confirmPassword"
+            [type]="confirmPasswordHidden ? 'password' : 'text'"
+            formControlName="confirmPassword"
+            class="form-control"
+            (blur)="f['confirmPassword'].markAsTouched()"
+            [ngClass]="{ 'is-invalid': f['confirmPassword'].touched && f['confirmPassword'].invalid }"
+          />
+          <span class="password-eye" (click)="toggleConfirmPasswordVisibility()">
+            <i [ngClass]="confirmPasswordHidden ? 'fa fa-eye' : 'fa fa-eye-slash'"></i>
+          </span>
+          <div
+            *ngIf="f['confirmPassword'].touched && f['confirmPassword']?.invalid"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f['confirmPassword']?.errors?.['required']">Confirm password is required.</div>
+            <div *ngIf="f['confirmPassword']?.errors?.['matching']">Passwords do not match.</div>
+          </div>
+        </div>
+  
+        <!-- Submit Button -->
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
