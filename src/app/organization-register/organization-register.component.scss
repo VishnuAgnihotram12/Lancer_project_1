@@ -1,86 +1,94 @@
 .organization-container {
-    display: flex;
-    height: 100vh;
-    background-color: #f5f6fc; /* Light purple background */
-    padding: 20px;
-    gap: 20px; /* Add space between the sections */
-  }
-  
-  .left-section {
-    width: 38%; /* Slightly reduced width for better balance */
-    padding: 20px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .left-section h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    font-weight: bold;
-  }
-  
-  .left-section .action-button {
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 15px;
-    font-size: 16px;
-    background-color: #4f46e5; /* Blue button color */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: transform 0.2s;
-  }
-  
-  .left-section .action-button:hover {
-    transform: scale(1.05);
-    background-color: #4338ca; /* Darker blue on hover */
-  }
-  
-  .right-section {
-    width: 58%; /* Reduced width of the right section */
-    padding: 20px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .attendance-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  .attendance-table th,
-  .attendance-table td {
-    border: 1px solid #ddd;
-    text-align: left;
-    padding: 10px;
-    font-size: 16px;
-  }
-  
-  .attendance-table th {
-    background-color: #4f46e5; /* Match button color for headers */
-    color: white;
-    font-weight: bold;
-    text-align: center;
-  }
-  
-  .attendance-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  .attendance-table tr:hover {
-    background-color: #e2e8f0; /* Light gray hover effect */
-  }
-  
-  .attendance-table td {
-    text-align: center;
-  }
-  
+  display: flex;
+  height: 100vh;
+  background-color: #f5f6fc; /* Light purple background */
+  padding: 20px;
+  gap: 20px; /* Add space between the sections */
+}
+
+.left-section {
+  width: 38%; /* Slightly reduced width for better balance */
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.left-section h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.left-section .organization-name {
+  font-size: 18px;
+  margin-left: 10px; /* Add spacing between the heading and the name */
+  color: #4f46e5; /* Match the button color */
+  font-weight: normal; /* Make it visually distinct from the heading */
+}
+
+.left-section .action-button {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 15px;
+  font-size: 16px;
+  background-color: #4f46e5; /* Blue button color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.left-section .action-button:hover {
+  transform: scale(1.05);
+  background-color: #4338ca; /* Darker blue on hover */
+}
+
+.right-section {
+  width: 58%; /* Reduced width of the right section */
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.attendance-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.attendance-table th,
+.attendance-table td {
+  border: 1px solid #ddd;
+  text-align: left;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.attendance-table th {
+  background-color: #4f46e5; /* Match button color for headers */
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.attendance-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.attendance-table tr:hover {
+  background-color: #e2e8f0; /* Light gray hover effect */
+}
+
+.attendance-table td {
+  text-align: center;
+}
