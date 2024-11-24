@@ -106,3 +106,15 @@
   display: flex;
   justify-content: end;
 }
+
+.no-data-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%; /* Make the message vertically centered */
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+

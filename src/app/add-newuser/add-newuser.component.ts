@@ -21,7 +21,7 @@ export class AddNewuserComponent {
   onSubmit() {
     if (this.addUserForm.valid) {
       console.log('Form Submitted', this.addUserForm.value);
-      this.apiService.add_user(this.addUserForm.valid).subscribe((result:any)=>{
+      this.apiService.add_user(this.addUserForm.value).subscribe((result:any)=>{
        if(result && result.status === 200){
         this.router.navigate(["Organization-register"])
        }
