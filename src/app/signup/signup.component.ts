@@ -65,7 +65,7 @@ export class SignupComponent implements OnInit {
     if (this.form.valid) {
       console.log('Form Data:', this.form.value);
       this.apiSeervice.register(this.form.value).subscribe((result: any)=> {
-        if(result && result.status ===  "200"){
+        if(result && result.status ===  200){
           setTimeout(() => {
             this.router.navigate(["Login"])
           },2000)

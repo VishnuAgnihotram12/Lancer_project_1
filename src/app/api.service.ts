@@ -41,8 +41,8 @@ export class ApiService {
 
   public add_user(user_data: any){
     const formData = new FormData();
-    formData.append('newusername', user_data.newusername);
-    formData.append('newuserid', user_data.newuserid);
+    formData.append('newusername', user_data.userId);
+    formData.append('newuserid', user_data.userName);
     return this.httpservice.post("http://127.0.0.1:5000/add",formData);
   }
 
