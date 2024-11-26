@@ -36,7 +36,7 @@
             [ngClass]="{ 'is-invalid': f['password'].touched && f['password'].invalid }"
           />
           <span class="password-eye" (click)="togglePasswordVisibility()">
-            <i [ngClass]="passwordHidden ? 'fa fa-eye' : 'fa fa-eye-slash'"></i>
+            <i [ngClass]="passwordHidden ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
           </span>
           <div *ngIf="f['password'].touched && f['password']?.invalid" class="invalid-feedback">
             <div *ngIf="f['password']?.errors?.['required']">Password is required.</div>

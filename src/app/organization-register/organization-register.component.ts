@@ -49,4 +49,13 @@ export class OrganizationRegisterComponent {
     link.click();
     window.URL.revokeObjectURL(url);
   }
+
+  public viewProfile() {
+    this.router.navigate(['profile']); // Replace 'profile' with your profile route
+  }
+
+  public logout() {
+    localStorage.clear(); // Clear all stored data
+    this.router.navigate(['Login']); // Redirect to the login page
+  }
 }
