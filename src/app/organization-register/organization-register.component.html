@@ -1,40 +1,72 @@
 <div class="organization-container">
-  <div class="left-section">
-    <h2>
-      Organisation Management
-      (<span class="organization-name">{{organisationName}}</span>)
-    </h2>
-    <button class="action-button" (click)="take_attendance()">Take Attendance</button>
-    <button class="action-button" (click)="add_User()">Add New User</button>
+  <!-- <div class="header-bar">
+    <img src="/assets/company-logo.png" alt="Company Logo" class="company-logo" />
+    <img
+    src="/assets/profile-icon.png"
+    alt="Profile Icon"
+    class="profile-icon"
+    [matMenuTriggerFor]="profileMenu"
+  />
+
+  <mat-menu #profileMenu="matMenu">
+    <button mat-menu-item (click)="viewProfile()">View Profile</button>
+    <button mat-menu-item (click)="logout()">Logout</button>
+  </mat-menu>
+  </div> -->
+  <div class="header-bar">
+    <img src="/assets/company-logo.png" alt="Company Logo" class="company-logo" />
+    <img
+      src="/assets/profile-icon.png"
+      alt="Profile Icon"
+      class="profile-icon"
+      [matMenuTriggerFor]="profileMenu"
+    />
   </div>
-  <div class="right-section">
-    <ng-container *ngIf="attendanceData.length > 0; else noDataTemplate">
-      <div class="position">
-        <button class="btn_class" (click)="downloadExcel()">Download Excel</button>
-      </div>
-      <table class="attendance-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Rolls</th>
-            <th>Times</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let attendance of attendanceData">
-            <td>{{attendance.name}}</td>
-            <td>{{attendance.rolls}}</td>
-            <td>{{attendance.times}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </ng-container>
-    <ng-template #noDataTemplate>
-      <div class="no-data-message">
-        <img src="assets/No-data.jpg" alt="">
-        <p>No data available</p>
-        <p>Please take attendance to get data</p>
-      </div>
-    </ng-template>
+  
+  <!-- Dropdown Menu -->
+  <mat-menu #profileMenu="matMenu" class="custom-menu">
+    <button mat-menu-item (click)="viewProfile()">View Profile</button>
+    <button mat-menu-item (click)="logout()">Logout</button>
+  </mat-menu>
+  
+  <div class="content-container">
+    <div class="left-section">
+      <h2>
+        Organisation Management
+        (<span class="organization-name">{{organisationName}}</span>)
+      </h2>
+      <button class="action-button" (click)="take_attendance()">Take Attendance</button>
+      <button class="action-button" (click)="add_User()">Add New User</button>
+    </div>
+    <div class="right-section">
+      <ng-container *ngIf="attendanceData.length > 0; else noDataTemplate">
+        <div class="position">
+          <button class="btn_class" (click)="downloadExcel()">Download Excel</button>
+        </div>
+        <table class="attendance-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Rolls</th>
+              <th>Times</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let attendance of attendanceData">
+              <td>{{attendance.name}}</td>
+              <td>{{attendance.rolls}}</td>
+              <td>{{attendance.times}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+      <ng-template #noDataTemplate>
+        <div class="no-data-message">
+          <img src="assets/No-data.jpg" alt="">
+          <p>No data available</p>
+          <p>Please take attendance to get data</p>
+        </div>
+      </ng-template>
+    </div>
   </div>
 </div>
