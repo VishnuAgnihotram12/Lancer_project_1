@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators, FormControl } from
 import { ApiService } from '../api.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-organization',
@@ -19,7 +20,9 @@ export class OrganizationComponent implements OnInit {
   });
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder,public apiService:ApiService,private router:Router, private renderer: Renderer2,public toastr:ToastrService) {}
+  constructor(private formBuilder: FormBuilder,public apiService:ApiService,
+    private router:Router, private renderer: Renderer2,
+    public toastr:ToastrService,private ngxService: NgxUiLoaderService) {}
 
   ngOnInit(): void {
     this.organisationList()
@@ -49,12 +52,17 @@ export class OrganizationComponent implements OnInit {
   }
 
   apply(): void {
+    this.ngxService.start();
     if (this.selectedOrganizationId) {
       this.toastr.success(`Selected Organization ID: ${this.selectedOrganizationId}`,'Success',{positionClass:'toast-top-center'});
       const foundName = this.organizationOptions.find(item => item.id === Number(this.selectedOrganizationId))?.name;
       localStorage.setItem("org-name",foundName);
-      this.router.navigate(["Organization-register"])
+      setTimeout(() => {
+        this.ngxService.stop();
+        this.router.navigate(["Organization-register"]);
+      },2000)
     } else {
+      this.ngxService.stop();
       this.toastr.error('Please select an organization.','error',{positionClass:'toast-top-center'});
 
     }
@@ -62,23 +70,25 @@ export class OrganizationComponent implements OnInit {
 
   organizationRegister(): void {
     this.submitted = true;
-
     if (this.form.valid) {
+      this.ngxService.start();
       this.apiService.addOragnisation(this.form.value).subscribe({
         next:(result:any)=>{
         if(result && result.status === 200){
           this.organisationList()
           this.form.reset();
            this.submitted = false;
+           this.ngxService.stop();
           this.toastr.success(result.message,'Success',{positionClass:'toast-top-center'});
-
         }
       },
       error:(err:any)=>{
+        this.ngxService.stop();
         this.toastr.error('An error occurred. Please try again.','error',{positionClass:'toast-top-center'});
       }
     })
     } else {
+      this.ngxService.stop();
       this.toastr.error('Please correct the errors in the form.','error',{positionClass:'toast-top-center'});
     }
   }

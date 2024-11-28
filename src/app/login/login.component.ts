@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 import { ApiService } from '../api.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
   isLoading:boolean = false;
 
   constructor(private formBuilder: FormBuilder, private apiservice: ApiService, private ngxtoastr:ToastrService,
-    private router:Router,) {}
+    private router:Router,private ngxService: NgxUiLoaderService) {}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -44,22 +45,24 @@ export class LoginComponent implements OnInit {
     if (this.form.valid) {
       console.log('Form Data:', this.form.value);
       this.isLoading = true;
+      this.ngxService.start();
       this.apiservice.login(this.form.value).subscribe((result: any)=> {
         if(result && result.status ===  200){
-          this.ngxtoastr.success('login is successfull.','succcess',{positionClass:'toast-top-center'});
           this.isLoading = false;
           localStorage.setItem("UserId",result.data.user_id);
-          setTimeout(() => {
-            this.router.navigate(["Organization"]);
-          },2000)
+          this.ngxService.stop();
+          this.router.navigate(["Organization"]);
+          this.ngxtoastr.success('login is successfull.','succcess',{positionClass:'toast-top-center'});
         }
       },(err:any) => {
         console.log(err)
+        this.ngxService.stop();
         this.ngxtoastr.error('An error occurred. Please try again.','error',{positionClass:'toast-top-center'});
         this.isLoading = false;
       })
 
     } else {
+      this.ngxService.stop();
       this.isLoading = false;
       this.ngxtoastr.error('Please correct the errors in the form.','error',{positionClass:'toast-top-center'});
     }
@@ -72,3 +75,4 @@ export class LoginComponent implements OnInit {
     this.router.navigate(["Signup"])
   }
 }
+;
