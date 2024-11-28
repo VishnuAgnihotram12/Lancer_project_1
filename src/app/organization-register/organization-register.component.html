@@ -1,34 +1,23 @@
 <div class="organization-container">
-  <!-- <div class="header-bar">
-    <img src="/assets/company-logo.png" alt="Company Logo" class="company-logo" />
-    <img
-    src="/assets/profile-icon.png"
-    alt="Profile Icon"
-    class="profile-icon"
-    [matMenuTriggerFor]="profileMenu"
-  />
-
-  <mat-menu #profileMenu="matMenu">
-    <button mat-menu-item (click)="viewProfile()">View Profile</button>
-    <button mat-menu-item (click)="logout()">Logout</button>
-  </mat-menu>
-  </div> -->
   <div class="header-bar">
     <img src="/assets/company-logo.png" alt="Company Logo" class="company-logo" />
-    <img
-      src="/assets/profile-icon.png"
-      alt="Profile Icon"
-      class="profile-icon"
-      [matMenuTriggerFor]="profileMenu"
-    />
+    <div class="profile-icon-container">
+      <img
+        src="/assets/profile-icon.png"
+        alt="Profile Icon"
+        class="profile-icon"
+        (click)="toggleProfileCard()"
+      />
+  
+      <!-- Profile Card -->
+      <div *ngIf="isProfileCardVisible" class="profile-card">
+        <ul>
+          <li (click)="viewProfile()">View Profile</li>
+          <li (click)="logout()">Logout</li>
+        </ul>
+      </div>
+    </div>
   </div>
-  
-  <!-- Dropdown Menu -->
-  <mat-menu #profileMenu="matMenu" class="custom-menu">
-    <button mat-menu-item (click)="viewProfile()">View Profile</button>
-    <button mat-menu-item (click)="logout()">Logout</button>
-  </mat-menu>
-  
   <div class="content-container">
     <div class="left-section">
       <h2>

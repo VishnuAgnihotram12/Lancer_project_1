@@ -1,7 +1,22 @@
 <div class="background">
   <div class="header-bar">
     <img src="/assets/company-logo.png" alt="Company Logo" class="company-logo" />
-    <img src="/assets/profile-icon.png" alt="Profile Icon" class="profile-icon" />
+    <div class="profile-icon-container">
+      <img
+        src="/assets/profile-icon.png"
+        alt="Profile Icon"
+        class="profile-icon"
+        (click)="toggleProfileCard()"
+      />
+  
+      <!-- Profile Card -->
+      <div *ngIf="isProfileCardVisible" class="profile-card">
+        <ul>
+          <li (click)="viewProfile()">View Profile</li>
+          <li (click)="logout()">Logout</li>
+        </ul>
+      </div>
+    </div>
   </div>
     <div class="card">
       <h2>Add New User</h2>

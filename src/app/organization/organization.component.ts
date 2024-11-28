@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ApiService } from '../api.service';
 import { Router } from '@angular/router';
@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./organization.component.scss'],
 })
 export class OrganizationComponent implements OnInit {
+  isProfileCardVisible = false;
+  private globalClickUnlistener: (() => void) | null = null;
   organizationOptions: any[] = [];
   selectedOrganizationId!: string;
   form: FormGroup = new FormGroup({
@@ -16,7 +18,7 @@ export class OrganizationComponent implements OnInit {
   });
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder,public apiService:ApiService,private router:Router) {}
+  constructor(private formBuilder: FormBuilder,public apiService:ApiService,private router:Router, private renderer: Renderer2) {}
 
   ngOnInit(): void {
     this.organisationList()
@@ -68,5 +70,47 @@ export class OrganizationComponent implements OnInit {
     } else {
       alert('Please correct the errors in the form.');
     }
+  }
+  toggleProfileCard(): void {
+    this.isProfileCardVisible = !this.isProfileCardVisible;
+
+    // If the card is visible, add a global click listener
+    if (this.isProfileCardVisible) {
+      this.addGlobalClickListener();
+    } else {
+      this.removeGlobalClickListener();
+    }
+  }
+
+  private addGlobalClickListener(): void {
+    this.globalClickUnlistener = this.renderer.listen('document', 'click', (event) => {
+      const target = event.target as HTMLElement;
+
+      // Close the card if the click is outside the card and the profile icon
+      if (!target.closest('.profile-icon-container')) {
+        this.isProfileCardVisible = false;
+        this.removeGlobalClickListener();
+      }
+    });
+  }
+
+  private removeGlobalClickListener(): void {
+    if (this.globalClickUnlistener) {
+      this.globalClickUnlistener(); // Remove the listener
+      this.globalClickUnlistener = null;
+    }
+  }
+
+  viewProfile(): void {
+    console.log('View Profile clicked');
+    // Add logic for "View Profile"
+  }
+
+  logout(): void {
+    this.router.navigate(['Login']); 
+  }
+
+  ngOnDestroy(): void {
+    this.removeGlobalClickListener(); // Cleanup the listener when the component is destroyed
   }
 }
