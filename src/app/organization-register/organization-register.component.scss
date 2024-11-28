@@ -157,7 +157,9 @@
 
 .profile-icon-container {
   position: relative;
-  display: inline-block;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .profile-icon {
