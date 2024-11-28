@@ -26,6 +26,7 @@ export class OrganizationRegisterComponent {
     this.organisationName = localStorage.getItem("org-name");
   }
   public take_attendance(){
+    this.toastr.success('Please go beside screen and click on the esc btn!','',{positionClass:'toast-top-center'});
     this.ngxService.start();
    this.apiService.attendanceAPI().subscribe({
     next:(result:any)=>{

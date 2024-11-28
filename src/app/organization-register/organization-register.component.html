@@ -2,6 +2,7 @@
   <div class="header-bar">
     <img src="/assets/company-logo.png" alt="Company Logo" class="company-logo" />
     <div class="profile-icon-container">
+      <button class="btn_class" (click)="downloadExcel()">Download Excel</button>
       <img
         src="/assets/profile-icon.png"
         alt="Profile Icon"
@@ -29,9 +30,6 @@
     </div>
     <div class="right-section">
       <ng-container *ngIf="attendanceData.length > 0; else noDataTemplate">
-        <div class="position">
-          <button class="btn_class" (click)="downloadExcel()">Download Excel</button>
-        </div>
         <table class="attendance-table">
           <thead>
             <tr>

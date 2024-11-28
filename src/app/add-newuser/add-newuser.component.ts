@@ -25,6 +25,7 @@ export class AddNewuserComponent {
 
   onSubmit() {
     if (this.addUserForm.valid) {
+      this.toastr.success('Please go beside screen and click on the esc btn!','',{positionClass:'toast-top-center'});
       this.ngxService.start();
       console.log('Form Submitted', this.addUserForm.value);
       this.apiService.add_user(this.addUserForm.value).subscribe({
