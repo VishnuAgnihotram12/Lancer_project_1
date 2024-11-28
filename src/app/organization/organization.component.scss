@@ -32,8 +32,9 @@
     padding: 0 20px; /* Add padding to left and right for spacing */
     margin-bottom: 20px; /* Space below the header */
     top: 0;
-  left: 0;
-  z-index: 10;
+    left: 0;
+    z-index: 10;
+    padding: 10px;
   }
   
   .company-logo {
@@ -143,4 +144,47 @@
       width: 100%; /* Full width for stacked layout */
     }
   }
+
+  .profile-icon-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .profile-icon {
+    position: relative;
+    cursor: pointer;
+    z-index: 10;
+  }
+  
+  .profile-card {
+    position: absolute;
+    top: 50px; /* Position the card below the profile icon */
+    right: 0; /* Align the card to the right edge of the icon */
+    background-color: #ffffff; /* White background for the card */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+    border-radius: 10px;
+    width: 150px; /* Width of the card */
+    z-index: 100; /* Ensure the card is above other elements */
+    padding: 10px;
+    text-align: center; /* Center align text inside the card */
+  }
+  
+  .profile-card ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .profile-card li {
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .profile-card li:hover {
+    background-color: #f8f9fa; /* Light gray background on hover */
+  }
+  
   
