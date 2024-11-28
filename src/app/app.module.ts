@@ -19,6 +19,7 @@ import { OrganizationComponent } from './organization/organization.component';
 import { HttpClientModule } from '@angular/common/http';
 import { OrganizationRegisterComponent } from './organization-register/organization-register.component';
 import { AddNewuserComponent } from './add-newuser/add-newuser.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { AddNewuserComponent } from './add-newuser/add-newuser.component';
     MatIconModule,
     HttpClientModule,
     MatMenuModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
