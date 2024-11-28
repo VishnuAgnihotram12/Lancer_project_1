@@ -20,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { OrganizationRegisterComponent } from './organization-register/organization-register.component';
 import { AddNewuserComponent } from './add-newuser/add-newuser.component';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 
 @NgModule({
@@ -47,6 +48,15 @@ import { ToastrModule } from 'ngx-toastr';
     MatMenuModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    NgxUiLoaderModule.forRoot({
+      bgsColor: 'blue',
+      bgsOpacity: 0.5,
+      bgsPosition: 'bottom-right',
+      bgsSize: 40,
+      bgsType: 'ball-spin-clockwise', 
+      fgsType: 'rectangle-bounce', 
+      overlayColor: 'rgba(40,40,40,0.8)',
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

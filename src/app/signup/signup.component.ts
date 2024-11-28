@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 import { ApiService } from '../api.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-signup',
@@ -15,7 +16,8 @@ export class SignupComponent implements OnInit {
   passwordHidden = true;
   confirmPasswordHidden = true;
 
-  constructor(private formBuilder: FormBuilder,public apiSeervice:ApiService, private router:Router,private toastr:ToastrService) {}
+  constructor(private formBuilder: FormBuilder,public apiSeervice:ApiService, private router:Router,
+    private toastr:ToastrService,private ngxService: NgxUiLoaderService) {}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -64,22 +66,27 @@ export class SignupComponent implements OnInit {
     });
 
     if (this.form.valid) {
+      this.ngxService.start();
       console.log('Form Data:', this.form.value);
       this.apiSeervice.register(this.form.value).subscribe((result: any)=> {
         if(result && result.status ===  200){
+          this.ngxService.stop();
+          this.router.navigate(["Login"])
           this.toastr.success('registration is successfull.','success',{positionClass:'toast-top-center'})
-          setTimeout(() => {
-            this.router.navigate(["Login"])
-          },2000)
+          // setTimeout(() => {
+          //   this.router.navigate(["Login"])
+          // },2000)
         }
         else {
           if(result.status === "401"){
           }
         }
       },(err) => {
+        this.ngxService.stop();
         this.toastr.error('An error occurred. Please try again.','error',{positionClass:'toast-top-center'});
       });
     } else {
+      this.ngxService.stop();
       this.toastr.error('Please correct the errors in the form.','error',{positionClass:'toast-top-center'})
     }
   }
