@@ -2,6 +2,7 @@ import { Component, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../api.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-newuser',
@@ -13,7 +14,7 @@ export class AddNewuserComponent {
   isProfileCardVisible = false;
   private globalClickUnlistener: (() => void) | null = null;
 
-  constructor(private fb: FormBuilder,public apiService:ApiService,private router:Router, private renderer: Renderer2) {
+  constructor(private fb: FormBuilder,public apiService:ApiService,private router:Router, private renderer: Renderer2,private toastr:ToastrService) {
     this.addUserForm = this.fb.group({
       userName: ['', [Validators.required, Validators.minLength(3)]],
       userId: ['', [Validators.required, Validators.pattern('^[0-9]*$')]]
@@ -23,13 +24,20 @@ export class AddNewuserComponent {
   onSubmit() {
     if (this.addUserForm.valid) {
       console.log('Form Submitted', this.addUserForm.value);
-      this.apiService.add_user(this.addUserForm.value).subscribe((result:any)=>{
+      this.apiService.add_user(this.addUserForm.value).subscribe({
+        next:(result:any)=>{
        if(result && result.status === 200){
+        this.toastr.success('New User Registration Is Successfull!','Success',{positionClass:'toast-top-center'});
         this.router.navigate(["Organization-register"])
        }
-      });
+      },
+    error:(err: any)=>{
+      this.toastr.error('An error occurred. Please try again.','error',{positionClass:'toast-top-center'});
+    }});
     } else {
       console.log('Form is invalid');
+      this.toastr.error('Please correct the errors in the form.','error',{positionClass:'toast-top-center'});
+
     }
   }
 

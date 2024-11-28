@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-student-register',
@@ -13,7 +14,7 @@ export class StudentRegisterComponent implements OnInit {
   @ViewChild('canvas') canvas!: ElementRef<HTMLCanvasElement>;
   capturedImage: string | null = null;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder,public toastr:ToastrService) {}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -43,9 +44,9 @@ export class StudentRegisterComponent implements OnInit {
 
     if (this.form.valid) {
       console.log('Form Data:', this.form.value);
-      alert('Registration successful!');
+     this.toastr.success('Registration successful!','Success',{positionClass:'toast-top-center'});
     } else {
-      alert('Please correct the errors in the form.');
+      this.toastr.error('Please correct the errors in the form.','error',{positionClass:'toast-top-center'});
     }
   }
 
@@ -60,7 +61,7 @@ export class StudentRegisterComponent implements OnInit {
       })
       .catch((err) => {
         console.error('Error accessing camera:', err);
-        alert('Unable to access camera.');
+        this.toastr.error('Unable to access camera.','error',{positionClass:'toast-top-center'});
       });
   }
 

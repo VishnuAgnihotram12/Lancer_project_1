@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { ApiService } from '../api.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   passwordHidden = true;
   isLoading:boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private apiservice: ApiService,
+  constructor(private formBuilder: FormBuilder, private apiservice: ApiService, private ngxtoastr:ToastrService,
     private router:Router,) {}
 
   ngOnInit(): void {
@@ -45,6 +46,7 @@ export class LoginComponent implements OnInit {
       this.isLoading = true;
       this.apiservice.login(this.form.value).subscribe((result: any)=> {
         if(result && result.status ===  200){
+          this.ngxtoastr.success('login is successfull.','succcess',{positionClass:'toast-top-center'});
           this.isLoading = false;
           localStorage.setItem("UserId",result.data.user_id);
           setTimeout(() => {
@@ -53,12 +55,13 @@ export class LoginComponent implements OnInit {
         }
       },(err:any) => {
         console.log(err)
+        this.ngxtoastr.error('An error occurred. Please try again.','error',{positionClass:'toast-top-center'});
         this.isLoading = false;
       })
 
     } else {
       this.isLoading = false;
-      alert('Please correct the errors in the form.');
+      this.ngxtoastr.error('Please correct the errors in the form.','error',{positionClass:'toast-top-center'});
     }
   }
 

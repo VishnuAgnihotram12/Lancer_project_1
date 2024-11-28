@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { ApiService } from '../api.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup',
@@ -14,7 +15,7 @@ export class SignupComponent implements OnInit {
   passwordHidden = true;
   confirmPasswordHidden = true;
 
-  constructor(private formBuilder: FormBuilder,public apiSeervice:ApiService, private router:Router) {}
+  constructor(private formBuilder: FormBuilder,public apiSeervice:ApiService, private router:Router,private toastr:ToastrService) {}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -66,6 +67,7 @@ export class SignupComponent implements OnInit {
       console.log('Form Data:', this.form.value);
       this.apiSeervice.register(this.form.value).subscribe((result: any)=> {
         if(result && result.status ===  200){
+          this.toastr.success('registration is successfull.','success',{positionClass:'toast-top-center'})
           setTimeout(() => {
             this.router.navigate(["Login"])
           },2000)
@@ -75,10 +77,10 @@ export class SignupComponent implements OnInit {
           }
         }
       },(err) => {
-        // this.toastr.error(err.error.message);
+        this.toastr.error('An error occurred. Please try again.','error',{positionClass:'toast-top-center'});
       });
     } else {
-      alert('Please correct the errors in the form.');
+      this.toastr.error('Please correct the errors in the form.','error',{positionClass:'toast-top-center'})
     }
   }
 

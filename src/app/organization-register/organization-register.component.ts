@@ -1,6 +1,7 @@
 import { Component, Renderer2 } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-organization-register',
@@ -12,7 +13,7 @@ export class OrganizationRegisterComponent {
   private globalClickUnlistener: (() => void) | null = null;
    public attendanceData:any = [];
    public organisationName:any;
-  constructor(public apiService:ApiService,private router:Router,  private renderer: Renderer2){
+  constructor(public apiService:ApiService,private router:Router,  private renderer: Renderer2,public toastr:ToastrService){
 
   }
   ngOnInit(){
@@ -22,12 +23,25 @@ export class OrganizationRegisterComponent {
     this.organisationName = localStorage.getItem("org-name");
   }
   public take_attendance(){
-   this.apiService.attendanceAPI().subscribe((result:any)=>{
+   this.apiService.attendanceAPI().subscribe({
+    next:(result:any)=>{
     if(result && result.status === 200){
+      this.toastr.success('Attendance successful!','Success',{positionClass:'toast-top-center'});
       this.attendanceData = result.data.attendance;
       localStorage.setItem("AttendanceData",JSON.stringify(result.data.attendance));
+    } else {
+      this.toastr.error('error in taking attendance','error',{positionClass:'toast-top-center'});
     }
-   });
+   },
+   error:(error) => {
+    console.error('Error:', error);
+    if (error.status === 500) {
+      this.toastr.error('Server error occurred. Please try again later.','error',{positionClass:'toast-top-center'});
+    } else {
+      this.toastr.error('An error occurred. Please try again.','error',{positionClass:'toast-top-center'});
+    }
+  },
+  });
   }
   public add_User(){
     this.router.navigate(["Add-user"])
@@ -44,6 +58,7 @@ export class OrganizationRegisterComponent {
   public downloadExcel(){
     const csvData = this.convertToCSV(this.attendanceData); 
     const blob = new Blob([csvData], { type: 'text/csv' }); 
+    this.toastr.success('Data Downloaded Successful!','Success',{positionClass:'toast-top-center'});
     const url = window.URL.createObjectURL(blob); 
     const link = document.createElement('a');
     link.href = url;
