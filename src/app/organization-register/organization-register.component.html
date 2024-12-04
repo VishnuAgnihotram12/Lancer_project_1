@@ -13,6 +13,7 @@
       <!-- Profile Card -->
       <div *ngIf="isProfileCardVisible" class="profile-card">
         <ul>
+          <li>{{userName}}</li>
           <li (click)="viewProfile()">View Profile</li>
           <li (click)="logout()">Logout</li>
         </ul>
