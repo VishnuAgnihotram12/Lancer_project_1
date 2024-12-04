@@ -14,6 +14,7 @@ export class OrganizationRegisterComponent {
   private globalClickUnlistener: (() => void) | null = null;
    public attendanceData:any = [];
    public organisationName:any;
+  public userName:any;
   constructor(public apiService:ApiService,private router:Router, 
      private renderer: Renderer2,public toastr:ToastrService,
      private ngxService: NgxUiLoaderService){
@@ -24,6 +25,7 @@ export class OrganizationRegisterComponent {
     const parsedArray = storedArray ? JSON.parse(storedArray) : [];
     this.attendanceData = parsedArray;
     this.organisationName = localStorage.getItem("org-name");
+    this.userName=localStorage.getItem("user-name");
   }
   public take_attendance(){
     this.toastr.success('Please go beside screen and click on the esc btn!','',{positionClass:'toast-top-center'});
