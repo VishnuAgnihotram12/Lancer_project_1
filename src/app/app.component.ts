@@ -24,7 +24,7 @@ export class AppComponent {
     this.apiService.oragnisationList(user_id).subscribe({
       next:(result: any)=> {
       if(result){
-      
+      localStorage.setItem("user-name",result.data.user_data.name);
       }
     },error:(err: any)=>{
       this.toastr.error('An error occurred. Please try again.','error',{positionClass:'toast-top-center'});
