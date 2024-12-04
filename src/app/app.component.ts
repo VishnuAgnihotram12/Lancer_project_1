@@ -11,6 +11,10 @@ export class AppComponent {
   navigateToSignup() {
     this.router.navigate(['/signup']);
 }
+  constructor(private formBuilder: FormBuilder,public apiService:ApiService,
+    private router:Router, private renderer: Renderer2,
+    public toastr:ToastrService,private ngxService: NgxUiLoaderService) {}
+  
   public userList(){
     const user_id  = localStorage.getItem("UserId")
     this.apiService.oragnisationList(user_id).subscribe({
