@@ -25,7 +25,26 @@
         Organisation Management
         (<span class="organization-name">{{organisationName}}</span>)
       </h2>
-      <button class="action-button" (click)="take_attendance()">Take Attendance</button>
+      <form [formGroup]="attendanceForm">
+    <div>
+      <label for="subject">Subject:</label>
+      <input
+        id="subject"
+        formControlName="subject"
+        [ngClass]="{ 'invalid-input': attendanceForm.get('subject')?.invalid && attendanceForm.get('subject')?.touched }"
+      />
+      <div class="error-message" *ngIf="attendanceForm.get('subject')?.invalid && attendanceForm.get('subject')?.touched">
+        Please enter a valid subject.
+      </div>
+    </div>
+    <button
+      class="action-button"
+      (click)="takeAttendance()"
+      [disabled]="attendanceForm.invalid"
+    >
+      Take Attendance
+    </button>
+      </form>
       <button class="action-button" (click)="add_User()">Add New User</button>
     </div>
     <div class="right-section">
