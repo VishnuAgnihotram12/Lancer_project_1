@@ -13,10 +13,12 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 export class AddNewuserComponent {
   addUserForm: FormGroup;
   isProfileCardVisible = false;
+  public userName:any
   private globalClickUnlistener: (() => void) | null = null;
 
   constructor(private fb: FormBuilder,public apiService:ApiService,private router:Router, 
     private renderer: Renderer2,private toastr:ToastrService,private ngxService: NgxUiLoaderService) {
+    this.userName=localStorage.getItem("user-name");
     this.addUserForm = this.fb.group({
       userName: ['', [Validators.required, Validators.minLength(3)]],
       userId: ['', [Validators.required, Validators.pattern('^[0-9]*$')]]

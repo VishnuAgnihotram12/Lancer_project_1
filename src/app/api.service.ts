@@ -45,10 +45,11 @@ export class ApiService {
     formData.append('newuserid', user_data.userName);
     return this.httpservice.post("http://127.0.0.1:5000/add",formData);
   }
-
-  public attendanceAPI(){
-    return this.httpservice.get("http://127.0.0.1:5000/start");
-   }
+  
+  public attendanceAPI(subject: string) {
+  const params = new HttpParams().set('subject', subject);
+  return this.httpservice.get("http://127.0.0.1:5000/start", { params });
+  }
 
   public user_Profile(user_id: any){
     const payload = {

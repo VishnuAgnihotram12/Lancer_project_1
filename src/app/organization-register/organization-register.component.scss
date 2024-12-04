@@ -54,6 +54,16 @@
   align-items: flex-start;
 }
 
+.left-section input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    &.invalid-input {
+      border-color: red;
+    }
+}
+
 .left-section h2 {
   font-size: 24px;
   margin-bottom: 20px;
@@ -69,6 +79,12 @@
   font-weight: normal; /* Make it visually distinct from the heading */
 }
 
+.left-section .error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
 .left-section .action-button {
   width: 100%;
   margin-bottom: 10px;
@@ -80,6 +96,10 @@
   border-radius: 5px;
   cursor: pointer;
   transition: transform 0.2s;
+  &:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+  }
 }
 
 .left-section .action-button:hover {

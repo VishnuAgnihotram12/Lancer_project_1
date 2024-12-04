@@ -11,12 +11,19 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 })
 export class OrganizationRegisterComponent {
   isProfileCardVisible = false;
+  attendanceForm = new FormGroup({
+    subject: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^[a-zA-Z]+$'), // Only letters allowed
+    ]),
+  });
   private globalClickUnlistener: (() => void) | null = null;
    public attendanceData:any = [];
    public organisationName:any;
+  public userName:any;
   constructor(public apiService:ApiService,private router:Router, 
      private renderer: Renderer2,public toastr:ToastrService,
-     private ngxService: NgxUiLoaderService){
+     private ngxService: NgxUiLoaderService,){
 
   }
   ngOnInit(){
@@ -24,11 +31,13 @@ export class OrganizationRegisterComponent {
     const parsedArray = storedArray ? JSON.parse(storedArray) : [];
     this.attendanceData = parsedArray;
     this.organisationName = localStorage.getItem("org-name");
+    this.userName=localStorage.getItem("user-name");
   }
   public take_attendance(){
     this.toastr.success('Please go beside screen and click on the esc btn!','',{positionClass:'toast-top-center'});
     this.ngxService.start();
-   this.apiService.attendanceAPI().subscribe({
+    const subject = this.attendanceForm.get('subject')?.value;
+   this.apiService.attendanceAPI(subject).subscribe({
     next:(result:any)=>{
     if(result && result.status === 200){
       this.ngxService.stop();
