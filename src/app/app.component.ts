@@ -14,6 +14,10 @@ export class AppComponent {
   constructor(private formBuilder: FormBuilder,public apiService:ApiService,
     private router:Router, private renderer: Renderer2,
     public toastr:ToastrService,private ngxService: NgxUiLoaderService) {}
+
+  ngOnInit(): void {
+    this.userList();
+  }
   
   public userList(){
     const user_id  = localStorage.getItem("UserId")
