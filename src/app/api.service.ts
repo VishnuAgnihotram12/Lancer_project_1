@@ -50,4 +50,11 @@ export class ApiService {
     return this.httpservice.get("http://127.0.0.1:5000/start");
    }
 
+  public user_Profile(user_id: any){
+    const payload = {
+      userid: user_id
+    }
+    return this.httpservice.post("http://127.0.0.1:5000/userdetails",payload);
+  }
+
 }
