@@ -21,7 +21,7 @@ export class AppComponent {
   
   public userList(){
     const user_id  = localStorage.getItem("UserId")
-    this.apiService.oragnisationList(user_id).subscribe({
+    this.apiService.user_Profile(user_id).subscribe({
       next:(result: any)=> {
       if(result){
       localStorage.setItem("user-name",result.data.user_data.name);
