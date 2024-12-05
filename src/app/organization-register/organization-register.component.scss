@@ -15,12 +15,14 @@
 }
 
 .company-logo {
+  width: 50px;
   margin-left: 8px;
   max-height: 60px; /* Scale logo proportionally */
   cursor: pointer; /* Indicate it is clickable */
 }
 
 .profile-icon {
+
   margin-right: 20px;
   max-height: 50px; /* Slightly smaller than logo */
   cursor: pointer; /* Indicate it is clickable */
@@ -217,4 +219,49 @@
 
 .profile-card li:hover {
   background-color: #f8f9fa; /* Light gray background on hover */
+}
+
+.form-group {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  margin-right: 10px; /* Adjust spacing between label and input */
+  flex-shrink: 0; /* Prevent label from shrinking */
+}
+
+.input-wrapper {
+  flex-grow: 1; /* Allow input wrapper to take the remaining space */
+}
+
+.input-wrapper input {
+  width: 100%; /* Input takes full width of its wrapper */
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+} 
+
+.download-excel-btn {
+  background-color: #4f46e5; /* Button background color */
+  color: white; /* Text color */
+  padding: 10px 20px; /* Padding around the text */
+  font-size: 16px; /* Font size for the button text */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
+  margin-right: 40px;
+}
+
+.download-excel-btn:hover {
+  background-color: #3b3cc0; /* Slightly darker color on hover */
+}
+
+.download-excel-btn:focus {
+  outline: none; /* Remove outline on focus */
 }
