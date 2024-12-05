@@ -26,6 +26,17 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  public userList(user_id:any){
+    this.apiservice.user_Profile(user_id).subscribe({
+      next:(result: any)=> {
+      if(result){
+      localStorage.setItem("user-name",result.data.user_data.name);
+      }
+    },error:(err: any)=>{
+      this.ngxtoastr.error('An error occurred. Please try again.','error',{positionClass:'toast-top-center'});
+    }});
+  }
+
   // Getter for easy access to form controls
   get f(): { [key: string]: AbstractControl } {
     return this.form.controls;
@@ -49,6 +60,7 @@ export class LoginComponent implements OnInit {
       this.apiservice.login(this.form.value).subscribe((result: any)=> {
         if(result && result.status ===  200){
           this.isLoading = false;
+          this.userList(result.data.user_id);
           localStorage.setItem("UserId",result.data.user_id);
           this.ngxService.stop();
           this.router.navigate(["Organization"]);

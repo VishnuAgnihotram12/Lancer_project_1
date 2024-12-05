@@ -28,9 +28,9 @@ export class OrganizationRegisterComponent {
 
   }
   ngOnInit(){
-    const storedArray = localStorage.getItem("AttendanceData");
-    const parsedArray = storedArray ? JSON.parse(storedArray) : [];
-    this.attendanceData = parsedArray;
+    // const storedArray = localStorage.getItem("AttendanceData");
+    // const parsedArray = storedArray ? JSON.parse(storedArray) : [];
+    // this.attendanceData = parsedArray;
     this.organisationName = localStorage.getItem("org-name");
     this.userName=localStorage.getItem("user-name");
   }
@@ -44,7 +44,10 @@ export class OrganizationRegisterComponent {
       this.ngxService.stop();
       this.toastr.success('Attendance successful!','Success',{positionClass:'toast-top-center'});
       this.attendanceData = result.data.attendance;
-      localStorage.setItem("AttendanceData",JSON.stringify(result.data.attendance));
+      if (this.attendanceForm.dirty) {
+        this.attendanceForm.reset();
+      }
+      // localStorage.setItem("AttendanceData",JSON.stringify(result.data.attendance));
     } else {
       this.ngxService.stop();
       this.toastr.error('error in taking attendance','error',{positionClass:'toast-top-center'});
@@ -125,6 +128,7 @@ export class OrganizationRegisterComponent {
   }
 
   logout(): void {
+    localStorage.clear();
     this.router.navigate(['Login']); 
   }
 

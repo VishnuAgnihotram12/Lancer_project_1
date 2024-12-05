@@ -85,6 +85,7 @@ export class AddNewuserComponent {
   }
 
   logout(): void {
+    localStorage.clear();
     this.router.navigate(['Login']); 
   }
 
