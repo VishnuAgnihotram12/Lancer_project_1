@@ -3,6 +3,7 @@ import { ApiService } from '../api.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-organization-register',
@@ -14,7 +15,7 @@ export class OrganizationRegisterComponent {
   attendanceForm = new FormGroup({
     subject: new FormControl('', [
       Validators.required,
-      Validators.pattern('^[a-zA-Z]+$'), // Only letters allowed
+      // Validators.pattern('^[a-zA-Z]+$'), // Only letters allowed
     ]),
   });
   private globalClickUnlistener: (() => void) | null = null;

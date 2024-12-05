@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -11,6 +11,7 @@ export class ApiService {
     const payload = {
         username: signup.username,
         password: signup.password,
+        email:signup.email,
         is_admin: true
       }
       return this.httpservice.post("http://127.0.0.1:5000/register",payload)
@@ -41,12 +42,12 @@ export class ApiService {
 
   public add_user(user_data: any){
     const formData = new FormData();
-    formData.append('newusername', user_data.userId);
-    formData.append('newuserid', user_data.userName);
+    formData.append('newusername', user_data.userName); 
+    formData.append('newuserid', user_data.userId);
     return this.httpservice.post("http://127.0.0.1:5000/add",formData);
   }
   
-  public attendanceAPI(subject: string) {
+  public attendanceAPI(subject: any) {
   const params = new HttpParams().set('subject', subject);
   return this.httpservice.get("http://127.0.0.1:5000/start", { params });
   }
