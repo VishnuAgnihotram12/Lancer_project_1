@@ -53,7 +53,7 @@ export class OrganizationRegisterComponent {
       this.toastr.error('error in taking attendance','error',{positionClass:'toast-top-center'});
     }
    },
-   error:(error) => {
+   error:(error:any) => {
     console.error('Error:', error);
     this.ngxService.stop();
     if (error.status === 500) {
@@ -69,28 +69,69 @@ export class OrganizationRegisterComponent {
   }
   private convertToCSV(data: any[]): string {
     if (!data.length) return '';
+  
+    // Map to customize header names
+    const headerMap: { [key: string]: string } = {
+      rolls: 'Roll No',
+      times: 'Available Time',
+    };
+  
+    // Convert headers to customized names
     const headers = Object.keys(data[0])
-    .map(header => header.charAt(0).toUpperCase() + header.slice(1))
-    .join(',');
-    const rows = data.map(row => Object.values(row).join(',')); 
-    return [headers, ...rows].join('\n'); 
+      .map(header =>
+        headerMap[header] 
+          ? headerMap[header] 
+          : header.charAt(0).toUpperCase() + header.slice(1)
+      )
+      .join(',');
+  
+    // Map rows to CSV format
+    const rows = data.map(row => Object.values(row).join(','));
+  
+    return [headers, ...rows].join('\n');
+  }
+  
+  
+  public downloadExcel() {
+    if (!this.attendanceData || !this.attendanceData.length) {
+      this.toastr.error('No data available for download!', 'Error', {
+        positionClass: 'toast-top-center',
+      });
+      return;
+    }
+  
+    this.ngxService.start();
+  
+    try {
+      const csvData = this.convertToCSV(this.attendanceData);
+      const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+      const url = window.URL.createObjectURL(blob);
+  
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'attendanceData.csv';
+      document.body.appendChild(link); // Required for Firefox
+      link.click();
+  
+      setTimeout(() => {
+        document.body.removeChild(link); // Clean up link element
+        window.URL.revokeObjectURL(url); // Revoke the object URL
+        this.ngxService.stop();
+        this.toastr.success('Data Downloaded Successfully!', 'Success', {
+          positionClass: 'toast-top-center',
+        });
+      }, 1000); // Ensure the download completes before revoking
+    } catch (error) {
+      this.ngxService.stop();
+      this.toastr.error('Failed to download the file. Please try again.', 'Error', {
+        positionClass: 'toast-top-center',
+      });
+      console.error('Error downloading file:', error);
+    }
   }
 
-  public downloadExcel(){
-    this.ngxService.start();
-    const csvData = this.convertToCSV(this.attendanceData); 
-    const blob = new Blob([csvData], { type: 'text/csv' }); 
-    this.toastr.success('Data Downloaded Successful!','Success',{positionClass:'toast-top-center'});
-    const url = window.URL.createObjectURL(blob); 
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'attendanceData.csv';
-    setTimeout(() => {
-      this.ngxService.stop();
-      link.click();
-    },2000)
-    window.URL.revokeObjectURL(url);
-  }
+  
+  
 
   toggleProfileCard(): void {
     this.isProfileCardVisible = !this.isProfileCardVisible;
