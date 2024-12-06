@@ -1,6 +1,9 @@
 <div class="organization-container">
   <div class="header-bar">
-    <img src="/assets/AI-logo.png" alt="Company Logo" class="company-logo" />
+    <div class="logo-with-text">
+      <img src="/assets/AI-logo.png" alt="Company Logo" class="company-logo" />
+      <span class="logo-text">Presence-AI</span>
+    </div>
     <div class="profile-icon-container">
       <button class="download-excel-btn" (click)="downloadExcel()">Download Excel</button>
       <img
@@ -21,9 +24,11 @@
   </div>
   <div class="content-container">
     <div class="left-section">
-      <h2>
+      <h2 class="organization-heading">
         Organisation Management
-        (<span class="organization-name">{{organisationName}}</span>)
+        <span class="organization-name-container">
+          (<span class="organization-name" [title]="organisationName">{{organisationName}}</span>)
+        </span>
       </h2>
       <form [formGroup]="attendanceForm">
         <div class="form-group">

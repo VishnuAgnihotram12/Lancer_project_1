@@ -187,5 +187,17 @@
   .profile-card li:hover {
     background-color: #f8f9fa; /* Light gray background on hover */
   }
+
+  .logo-with-text {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo-text {
+    margin-left: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #333; /* Adjust text color as needed */
+  }
   
   

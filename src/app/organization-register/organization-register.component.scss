@@ -81,6 +81,29 @@
   font-weight: normal; /* Make it visually distinct from the heading */
 }
 
+.organization-heading {
+  display: inline-flex; /* Ensures brackets and text stay together */
+  font-size: 24px; /* Adjust heading size */
+  font-weight: bold;
+  margin: 0;
+  align-items: center; /* Align items vertically */
+}
+
+.organization-name-container {
+  white-space: nowrap; /* Prevent text wrapping for the brackets and content */
+}
+
+.organization-name {
+  font-size: 18px; /* Match the organization name style */
+  color: #4f46e5; /* Text color */
+  font-weight: normal; /* Make it visually distinct from the heading */
+  max-width: 200px; /* Limit the width for long text */
+  overflow: hidden; /* Hide overflowing text */
+  text-overflow: ellipsis; /* Add ellipsis for long text */
+  vertical-align: middle; /* Align with brackets */
+}
+
+
 .left-section .error-message {
     color: red;
     font-size: 12px;
@@ -264,4 +287,16 @@
 
 .download-excel-btn:focus {
   outline: none; /* Remove outline on focus */
+}
+
+.logo-with-text {
+  display: flex;
+  align-items: center;
+}
+
+.logo-text {
+  margin-left: 10px;
+  font-size: 30px;
+  font-weight: bold;
+  color: #333; /* Adjust text color as needed */
 }
