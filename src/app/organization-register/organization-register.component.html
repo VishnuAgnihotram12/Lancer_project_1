@@ -1,8 +1,8 @@
 <div class="organization-container">
   <div class="header-bar">
-    <img src="/assets/company-logo.png" alt="Company Logo" class="company-logo" />
+    <img src="/assets/AI-logo.png" alt="Company Logo" class="company-logo" />
     <div class="profile-icon-container">
-      <button class="btn_class" (click)="downloadExcel()">Download Excel</button>
+      <button class="download-excel-btn" (click)="downloadExcel()">Download Excel</button>
       <img
         src="/assets/profile-icon.png"
         alt="Profile Icon"
@@ -13,7 +13,7 @@
       <!-- Profile Card -->
       <div *ngIf="isProfileCardVisible" class="profile-card">
         <ul>
-          <li (click)="viewProfile()">View Profile</li>
+          <li>{{userName}}</li>
           <li (click)="logout()">Logout</li>
         </ul>
       </div>
@@ -25,7 +25,28 @@
         Organisation Management
         (<span class="organization-name">{{organisationName}}</span>)
       </h2>
-      <button class="action-button" (click)="take_attendance()">Take Attendance</button>
+      <form [formGroup]="attendanceForm">
+        <div class="form-group">
+          <label for="subject">Subject:</label>
+          <div class="input-wrapper">
+            <input
+              id="subject"
+              formControlName="subject"
+              [ngClass]="{ 'invalid-input': attendanceForm.get('subject')?.invalid && attendanceForm.get('subject')?.touched }"
+            />
+            <div class="error-message" *ngIf="attendanceForm.get('subject')?.invalid && attendanceForm.get('subject')?.touched">
+              Please enter a valid subject.
+            </div>
+          </div>
+        </div>        
+    <button
+      class="action-button"
+      (click)="take_attendance()"
+      [disabled]="attendanceForm.invalid"
+    >
+      Take Attendance
+    </button>
+      </form>
       <button class="action-button" (click)="add_User()">Add New User</button>
     </div>
     <div class="right-section">

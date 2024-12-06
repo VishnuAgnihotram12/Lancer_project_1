@@ -12,6 +12,7 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 })
 export class OrganizationComponent implements OnInit {
   isProfileCardVisible = false;
+  public userName:any;
   private globalClickUnlistener: (() => void) | null = null;
   organizationOptions: any[] = [];
   selectedOrganizationId!: string;
@@ -25,6 +26,7 @@ export class OrganizationComponent implements OnInit {
     public toastr:ToastrService,private ngxService: NgxUiLoaderService) {}
 
   ngOnInit(): void {
+    this.userName=localStorage.getItem("user-name");
     this.organisationList()
     this.form = this.formBuilder.group({
       organizationName: [
@@ -128,6 +130,7 @@ export class OrganizationComponent implements OnInit {
   }
 
   logout(): void {
+    localStorage.clear();
     this.router.navigate(['Login']); 
   }
 

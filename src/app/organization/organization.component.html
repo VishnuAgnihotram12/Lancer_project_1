@@ -1,6 +1,6 @@
 <body class="organization-body">
   <div class="header-bar">
-    <img src="/assets/company-logo.png" alt="Company Logo" class="company-logo" />
+    <img src="/assets/AI-logo.png" alt="Company Logo" class="company-logo" />
     <div class="profile-icon-container">
       <img
         src="/assets/profile-icon.png"
@@ -12,7 +12,7 @@
       <!-- Profile Card -->
       <div *ngIf="isProfileCardVisible" class="profile-card">
         <ul>
-          <li (click)="viewProfile()">View Profile</li>
+          <li>{{userName}}</li>
           <li (click)="logout()">Logout</li>
         </ul>
       </div>
